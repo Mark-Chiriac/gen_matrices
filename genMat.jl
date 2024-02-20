@@ -5,7 +5,7 @@ function display_monomials(monomials)
         display(mon)
     end
 end
-function flatten_matrices(matrices::Vector{<:Any})
+function flatten_matrices(matrices::Any)
     return hcat([vec(matrix) for matrix in matrices]...)
 end
 
@@ -49,16 +49,16 @@ function check_linear_independence(monomials)
 end
 
 
-begin
-    n = 15 
-    # Generate matrices
-    X = gen_X(n)
-    Y = gen_Y(n)
-    # Generate monomials
-    monomials = gen_monomials(X, Y, n)  # Adjust degree as needed
-    is_independent = check_linear_independence(monomials)
-    println("Are the generated monomials linearly independent? ", is_independent)
-end
+# begin
+#     n = 15 
+#     # Generate matrices
+#     X = gen_X(n)
+#     Y = gen_Y(n)
+#     # Generate monomials
+#     monomials = gen_monomials(X, Y, n)  # Adjust degree as needed
+#     is_independent = check_linear_independence(monomials)
+#     println("Are the generated monomials linearly independent? ", is_independent)
+# end
 
 
 
