@@ -40,29 +40,25 @@ end
 function check_linear_independence(monomials)
     # Convert  matrix in the list to a flattened vector and stack them horizontally
     matrix_stack = flatten_matrices(monomials)
-    # print(size(matrix_stack))
-    # rank = rank(matrix_stack)
-    # Check linear independence by comparing the rank to the number of matrices
+    
     is_independent = rank(matrix_stack, atol=1e-10) == length(monomials)
     println(rank(matrix_stack, atol=1e-10))
     println(length(monomials))
-    # println("Rank=" ,rank)
+
     return is_independent
 end
 
 
 begin
-    n = 15 # Example for a 3x3 matrix, can be any positive integer
+    n = 15 
     # Generate matrices
     X = gen_X(n)
     Y = gen_Y(n)
     # Generate monomials
     monomials = gen_monomials(X, Y, n)  # Adjust degree as needed
-    # size(monomials)
     is_independent = check_linear_independence(monomials)
     println("Are the generated monomials linearly independent? ", is_independent)
 end
-# Check linear independence
 
 
 
