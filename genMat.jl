@@ -9,7 +9,7 @@ function flatten_matrices(matrices::Any)
     return hcat([vec(matrix) for matrix in matrices]...)
 end
 
-function gen_X(n)
+function gen_cyclic(n)
     X = zeros(n,n)
     for i in 1:n
         j = mod(i, n) + 1  #column index for the cyclic shift
@@ -18,14 +18,73 @@ function gen_X(n)
     return X
 end
 
-function gen_Y(n)
+
+function gen_rprime(n)
+    X = zeros(n,n)
+    for i in 1:n
+        j = mod(i+3, n) + 1  #column index for the cyclic shift
+        X[i, j] = 1
+    end
+    return X
+end
+
+
+function gen_sing_entry(n)
+    X = zeros(n,n)
+    X[1,1] = 1
+    return X
+end
+
+function gen_upper_diag(n)
+    X = zeros(n,n)
+    for i in 1:n-1
+        X[i, i+1] = 1
+    end
+    return X
+end
+
+
+function gen_vandermonde(n)
+    X = zeros(n,n)
+    for i in 1:n
+        for j in 1:n
+            X[i, j] = i^j
+        end
+    end
+    return X
+end
+
+function gen_diag_uniq(n)
     X = zeros(n,n)
     for i in 1:n
         X[i, i] = i
     end
     return X
 end
+
+function gen_diag(n)
+    X = zeros(n,n)
+    for i in 1:n
+        X[i, i] = 1
+    end
+    return X
+end
 # gen_Y(n) = spdiagm(0 => 1:n)
+
+function gen_udiag(n)
+    X = zeros(n,n)
+    for i in 1:n-1
+        X[i, i+1] = 1
+    end
+    return X
+end
+function gen_ldiag(n)
+    X = zeros(n,n)
+    for i in 1:n-1
+        X[i+1, i] = 1
+    end
+    return X
+end
 
 function gen_monomials(X_, Y_, d)
     monomials = []
